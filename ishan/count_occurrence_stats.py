@@ -37,7 +37,8 @@ class Stats:
             reader = csv.reader(f)
             next(reader)  # skip header
             for line in reader:
-                dictionary[tuple(map(str, line[0].replace(',', '')))] = tuple(line[1:-1])
+                dictionary[tuple(map(str, line[0].replace(',', '')))] = tuple(
+                    line[1:-1])
 
     def make_list_count_dict(self, words: list, no_of_words: int) -> dict:
         all_freq = {}
@@ -66,9 +67,8 @@ class Stats:
                     prob = prob * (my_dict[word[pos]][pos])
                     pos += 1
                 f.write("%s, %s\n" % (word, prob))
-        f.close()
 
-    def write_perc(self, my_dict: dict, FREQ_FILE_PATH = "log/letterFrequency.csv") -> object:
+    def write_perc(self, my_dict: dict, FREQ_FILE_PATH="log/letterFrequency.csv") -> object:
         FREQ_FILE_PATH = "log/letterFrequency.csv"
         with open(FREQ_FILE_PATH, 'w') as f:
             for key in my_dict.keys():

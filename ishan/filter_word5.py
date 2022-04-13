@@ -41,11 +41,16 @@ class FilterWords:
         return self.DEST_FILE_PATH
 
     def add_words_to_file(self):
-        all_words = list(self.dictionary.get_words_from_file(self.SRC_FILE_PATH, comment_char='#', word_length=5))
-        textfile = open(self.DEST_FILE_PATH, "w")
-        for element in all_words:
-            textfile.write(element + "\n")
-        textfile.close()
+        all_words = list(self.dictionary.get_words_from_file(
+            self.SRC_FILE_PATH, comment_char='#', word_length=5))
+        try:
+            textfile = open(self.DEST_FILE_PATH, "w")
+            for element in all_words:
+                textfile.write(element + "\n")
+        except:
+            print("Error: unable to write to file")
+        finally:
+            textfile.close()
 
 
 if __name__ == '__main__':

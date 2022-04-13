@@ -1,2 +1,5 @@
 # ignore all logs
 req.txt
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc

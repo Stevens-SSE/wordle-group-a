@@ -92,8 +92,9 @@ class UI:
         :param max_tries: maximum number of user tries
         """
         print(
-            Fore.GREEN + f'\nGuess a {word_length} letter word. You have {max_tries} chances. \nEnter an empty string to '
-                         f'terminate. \nGame {games_played + 1} BEGIN...')
+            Fore.GREEN +
+            f'\nGuess a {word_length} letter word. You have {max_tries} chances. \nEnter an empty string to '
+            f'terminate. \nGame {games_played + 1} BEGIN...')
 
     def game_over(self):
         print(Fore.RED + 'GAME OVER!')
@@ -134,7 +135,8 @@ class UI:
         :param wins:
         :return: prompt if it is valid
         """
-        prompt = input(self.letter_status(match, mismatch) + Fore.WHITE + "\nEnter your guess: ").lower()
+        prompt = input(self.letter_status(match, mismatch) +
+                       Fore.WHITE + "\nEnter your guess: ").lower()
         try:
             if prompt == "":
                 # print("UI func called")
@@ -298,19 +300,6 @@ class UI:
         else:
             return "continue"
 
-    # def valid_input(prompt: str, word_length: int):
-    #     """
-    #     validate the user input
-    #     """
-    #     if len(prompt.strip()) != word_length:
-    #         print(Fore.RED + f"Try again with a {word_length} letter word.")
-    #         return False
-    #     elif not (bool(re.match('^[a-zA-Z]*$', prompt)) is True):
-    #         print(Fore.RED + "Enter a word without numbers or special characters.")
-    #         return False
-    #     else:
-    #         return True
-
     def previously_tried(self, prompt, prev_tries):
         """
         check if a string has been tried before
@@ -321,50 +310,34 @@ class UI:
         else:
             return False
 
-    # def set_green(given_word, input_word, match, green_dict, pos):
-    #     for letter_of_given_word, letter_of_input_word in zip(given_word, input_word):
-    #         if letter_of_given_word == letter_of_input_word:
-    #             match.add(letter_of_input_word)
-    #             green_dict[pos] = letter_of_input_word
-    #     return green_dict
-
     def set_char_color(self, letter_of_given_word, letter_of_input_word, given_word, match, mismatch, given_char_dict,
                        input_char_dict):
         """
         set the character color depending on their position
         """
-        # letter_color, letter = (Fore.GREEN, letter_of_given_word) if letter_of_given_word == letter_of_input_word \
-        #     else (Fore.YELLOW, letter_of_input_word) if letter_of_input_word in given_word \
-        #     else (Fore.WHITE, 'x')
-
-        # letter_color, letter = (Fore.GREEN, letter_of_given_word + ', ') if letter_of_given_word == letter_of_input_word \
-        #     else (Fore.YELLOW, '`, ') if letter_of_input_word in given_word \
-        #     else (Fore.RED, '", ')
         if letter_of_given_word == letter_of_input_word:
             letter_color, letter = (Fore.GREEN, letter_of_given_word + ', ')
             match.add(letter_of_input_word)
             self.res_pattern += letter_of_given_word
             # Decrement Dictionary value by 1
-            given_char_dict[letter_of_given_word] = given_char_dict.get(letter_of_given_word, 0) - 1
-            input_char_dict[letter_of_input_word] = input_char_dict.get(letter_of_input_word, 0) - 1
+            given_char_dict[letter_of_given_word] = given_char_dict.get(
+                letter_of_given_word, 0) - 1
+            input_char_dict[letter_of_input_word] = input_char_dict.get(
+                letter_of_input_word, 0) - 1
         elif letter_of_input_word in given_word and given_char_dict[letter_of_input_word] > 0 and \
                 input_char_dict[letter_of_input_word] <= given_char_dict[letter_of_input_word]:
             letter_color, letter = (Fore.YELLOW, '`, ')
             match.add(letter_of_input_word)
             self.res_pattern += '_'
             # Decrement Dictionary value by 1
-            given_char_dict[letter_of_given_word] = given_char_dict.get(letter_of_given_word, 0) - 1
-            input_char_dict[letter_of_input_word] = input_char_dict.get(letter_of_input_word, 0) - 1
+            given_char_dict[letter_of_given_word] = given_char_dict.get(
+                letter_of_given_word, 0) - 1
+            input_char_dict[letter_of_input_word] = input_char_dict.get(
+                letter_of_input_word, 0) - 1
         else:
             letter_color, letter = (Fore.RED, '", ')
             mismatch.add(letter_of_input_word)
             self.res_pattern += '_'
-        # print(char_dict)
-        # if letter_of_input_word in given_word:
-        #     match.add(letter_of_input_word)
-        # else:
-        #     assert isinstance(letter_of_input_word, object)
-        #     mismatch.add(letter_of_input_word)
         print(letter_color + letter, end='')
 
     def letter_status(self, match, mismatch):
@@ -377,10 +350,6 @@ class UI:
             color = Fore.GREEN if char in match else Fore.RED if char in mismatch else Fore.WHITE
             buffer.write(color)
             buffer.write(char)
-            # if color == Fore.RED:
-            #     buffer.write("\'")
-            # elif color != Fore.GREEN:
-            #     buffer.write("\"")
             buffer.write(Fore.WHITE + ', ')
         return buffer.getvalue()
 

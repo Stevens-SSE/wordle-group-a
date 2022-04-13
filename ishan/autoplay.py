@@ -75,16 +75,21 @@ class Wordle:
         exit()
 
     def get_match_char_list(self, file_path) -> str:
-        _file = open(file_path, 'r')
-        counter = 5
-        res_string = ''
-        for line in _file.readlines():
-            res_string += line[0]
-            counter -= 1
-            if not counter:
-                break
-            # print(line[0])
-        return res_string
+        try:
+            _file = open(file_path, 'r')
+            counter = 5
+            res_string = ''
+            for line in _file.readlines():
+                res_string += line[0]
+                counter -= 1
+                if not counter:
+                    break
+                # print(line[0])
+            return res_string
+        except Exception as e:
+            print(e)
+        finally:
+            _file.close()
 
     def solve(self, flag: bool, match: str = '?', mismatch: str = '?', pattern: str = '?') -> list:
         match_file_path = 'log/letterFrequency.csv'
@@ -161,7 +166,8 @@ class Wordle:
         FILE_PATH = 'resource/word5.txt'
         LOG_FILE_PATH = 'log/gameplay.log'
         d = Dictionary()
-        all_words = list(d.get_words_from_file(FILE_PATH, word_length=WORD_LENGTH))
+        all_words = list(d.get_words_from_file(
+            FILE_PATH, word_length=WORD_LENGTH))
         max_limit = len(all_words)
         flag, given_word, self.match, self.mismatch, prev_tries, prompt, retries = self.ui.re_init(all_words, flag,
                                                                                                    given_word, match,
@@ -176,7 +182,7 @@ class Wordle:
         given_word = wordle.gen_word(all_words)
         # ref = Ref()
         # ref.set_given_word(given_word)
-        while prompt != "" and NO_GAMES>0:
+        while prompt != "" and NO_GAMES > 0:
             if prev_tries == len(all_words):
                 self.play_wordle()
             self.ui.welcome_message(WORD_LENGTH, MAX_TRIES, games_played)
@@ -188,12 +194,14 @@ class Wordle:
             while retries != MAX_TRIES:
                 try:
                     temp = wins
-                    countr+=1
+                    countr += 1
                     print("TRY: "+str(countr))
                     print("Pattern: " + self.ui.res_pattern)
 
-                    f, pattern = h.help_my_autoplay(self.match, pattern=self.ui.res_pattern)
-                    l = self.solve(f, self.match, self.mismatch, pattern=self.ui.res_pattern)
+                    f, pattern = h.help_my_autoplay(
+                        self.match, pattern=self.ui.res_pattern)
+                    l = self.solve(f, self.match, self.mismatch,
+                                   pattern=self.ui.res_pattern)
                     print(l)
                     print(prev_tried_words)
                     prompt = choice(l)
@@ -220,7 +228,8 @@ class Wordle:
                 NO_GAMES -= 1
                 given_word = wordle.gen_word(all_words)
                 prev_tried_words = []
-                wordle.log_gameplay(LOG_FILE_PATH, given_word, prev_tries, games_played, wins, guess_dist)
+                wordle.log_gameplay(LOG_FILE_PATH, given_word,
+                                    prev_tries, games_played, wins, guess_dist)
                 # check for termination of the program
                 if retries == MAX_TRIES and not flag:
                     self.ui.game_over()

@@ -21,20 +21,22 @@ class TestFileReader(unittest.TestCase):
         WORD_LENGTH = 5
         FILE_PATH = 'word_list'
         d = dictionary.Dictionary()
-        self.assertEqual(list(d.get_words_from_file(FILE_PATH, word_length=WORD_LENGTH)), [])
+        self.assertEqual(list(d.get_words_from_file(
+            FILE_PATH, word_length=WORD_LENGTH)), [])
 
     def test_with_valid_file_path(self):
         WORD_LENGTH = 5
         FILE_PATH = 'resource/word_list'
         d = dictionary.Dictionary()
-        self.assertNotEqual(list(d.get_words_from_file(FILE_PATH, word_length=WORD_LENGTH)), [])
+        self.assertNotEqual(list(d.get_words_from_file(
+            FILE_PATH, word_length=WORD_LENGTH)), [])
 
 
 class TestUI(unittest.TestCase):
     def test_with_match_words(self):
         """Test valid valid input length of string"""
-        u = ui.UI()
-        self.assertTrue(u.match_words("Tests", "Tests", 1, 1))
+        user_inter = ui.UI()
+        self.assertTrue(user_inter.match_words("Tests", "Tests", 1, 1))
 
     def test_with_unmatch_words(self):
         """Test valid invalid input length of string"""
@@ -65,15 +67,8 @@ class TestUI(unittest.TestCase):
         """Test if a value is being converted into a valid dictionary"""
         str_0 = '*8Y6Lk)H\rwhrk2;'
         u = ui.UI()
-        self.assertEqual(u.create_char_dict(str_0), {'*': 1, '8': 1, 'Y': 1, '6': 1, 'L': 1, 'k': 2, ')': 1, 'H': 1, '\r': 1, 'w': 1, 'h': 1, 'r': 1, '2': 1, ';': 1})
-        # var_0 = wordle.create_char_dict(str_0)
-        # assert var_0 == {'*': 1, '8': 1, 'Y': 1, '6': 1, 'L': 1, 'k': 2, ')': 1, 'H': 1, '\r': 1, 'w': 1, 'h': 1, 'r': 1, '2': 1, ';': 1}
-        # try:
-        #     float_0 = -733.9
-        #     var_1 = wordle.create_char_dict(float_0)
-        #     self.assertEqual(var_1, ('-', '7', '3', '3', '.', '9'))
-        # except BaseException:
-        #     pass
+        self.assertEqual(u.create_char_dict(str_0), {
+                         '*': 1, '8': 1, 'Y': 1, '6': 1, 'L': 1, 'k': 2, ')': 1, 'H': 1, '\r': 1, 'w': 1, 'h': 1, 'r': 1, '2': 1, ';': 1})
 
 
 class TestWordle(unittest.TestCase):
@@ -111,20 +106,21 @@ class TestWordle(unittest.TestCase):
     def test_log_gameplay(self):
         w = wordle.Wordle()
         try:
-            w.log_gameplay("log/logs.txt", "tests", "input_word", 1, 1, {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0})
+            w.log_gameplay("log/logs.txt", "tests", "input_word",
+                           1, 1, {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0})
         except Exception:
             pass
 
 
 class TestCountOccurStat(unittest.TestCase):
-    def test_case_0(self):
+    def test_default_init(self):
         stats_0 = stat.Stats()
         assert stats_0.FILE_PATH is None
         assert stats_0.words == []
         assert stats_0.no_of_words == 0
         assert stats_0.test_list == []
 
-    def test_case_1(self):
+    def test_default_str(self):
         stats_0 = stat.Stats()
         assert stats_0.FILE_PATH is None
         assert stats_0.words == []
@@ -133,7 +129,7 @@ class TestCountOccurStat(unittest.TestCase):
         var_0 = stats_0.__str__()
         assert var_0 == 'None: Counting game statistics...'
 
-    def test_case_2(self):
+    def test_make_tuple(self):
         try:
             stats_0 = stat.Stats()
             assert stats_0.FILE_PATH is None
@@ -153,7 +149,7 @@ class TestCountOccurStat(unittest.TestCase):
         except BaseException:
             pass
 
-    def test_case_3(self):
+    def test_make_dict(self):
         try:
             stats_0 = stat.Stats()
             assert stats_0.FILE_PATH is None
@@ -172,7 +168,7 @@ class TestCountOccurStat(unittest.TestCase):
         except BaseException:
             pass
 
-    def test_case_4(self):
+    def test_make_list_count_dict(self):
         try:
             dict_0 = None
             list_0 = [dict_0, dict_0, dict_0, dict_0]
@@ -187,7 +183,7 @@ class TestCountOccurStat(unittest.TestCase):
         except BaseException:
             pass
 
-    def test_case_5(self):
+    def test_calculate_stats_with_list(self):
         try:
             list_0 = []
             list_1 = [list_0, list_0, list_0, list_0]
@@ -201,7 +197,7 @@ class TestCountOccurStat(unittest.TestCase):
         except BaseException:
             pass
 
-    def test_case_6(self):
+    def test_calculate_stats_with_str(self):
         try:
             str_0 = 'q0#9J`JGEg.n_q'
             list_0 = [str_0]
@@ -214,7 +210,7 @@ class TestCountOccurStat(unittest.TestCase):
         except BaseException:
             pass
 
-    def test_case_7(self):
+    def test_make_list_count_dict(self):
         try:
             str_0 = "?V'i]{-hbG"
             list_0 = [str_0, str_0, str_0, str_0]
