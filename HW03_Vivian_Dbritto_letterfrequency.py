@@ -22,11 +22,14 @@ class CalculateStatistics:
             for key in data.keys():
                 for item in range(5):
                     data[key][item] = round(data[key][item]/count, 3)
+
         except IOError:
             print('An error occured trying to read the file.')
             print(
                 'Please make sure "new_words.txt" is present in the directory before running the program')
             quit()
+        finally:
+            f.close()
 
         try:
             fs = open("letterFrequency.csv", "w")
@@ -38,13 +41,13 @@ class CalculateStatistics:
                     answer += ","+str(data[key][item])
                 fs.write(answer+",\n")
 
-            fs.close()
-
         except IOError:
             print('An error occured trying to read the file.')
             print(
                 'Please make sure "letterFrequency.csv" is present in the directory before running the program')
             quit()
+        finally:
+            fs.close()
 
     # convert the list containing frequency of letters to a tuple
 
@@ -81,7 +84,7 @@ class CalculateStatistics:
 
     # calculate weight of word, sort according to it and write to wordRank.csv
 
-    def calculateAndSortWords(self) -> None:
+    def calculate_and_sort_words(self) -> None:
         inputData = self.read_and_make_tuple()
         try:
             answer = {}
@@ -112,11 +115,11 @@ class CalculateStatistics:
                 answer_new += ","+str('{:.15f}'.format(insideTuple[1]))
                 fs.write(answer_new+",\n")
 
-            fs.close()
-            f.close()
-
         except IOError:
             print('An error occured trying to read the file.')
             print(
                 'Please make sure "wordRank.csv" is present in the directory before running the program')
             quit()
+        finally:
+            fs.close()
+            f.close()

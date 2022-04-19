@@ -11,7 +11,7 @@ class SLinkedList:
     def __init__(self):
         self.headval = None
 
-    def listprint(self):
+    def listPrint(self):
         printval = self.headval
         print("Printing Linked List : ")
         while printval is not None:

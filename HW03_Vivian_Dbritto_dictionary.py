@@ -27,19 +27,15 @@ class Dictionary:
             new_file = open("new_words.txt", "w")
 
             for x in f:
-                # words contain '\n' at the end which counts as 1 character, hence 6
-                if(len(x) == 6 and x not in words_used):
+                # words contain '\n' at the end which counts as 1 character, hence 5
+                if(len(x.strip()) == 5 and x not in words_used):
                     self.myWordList.append(x[:-1].upper())
                     # writing to new file "new_file.txt"
                     new_file.write(f"{x.upper()}")
 
-            # for item in words_used:
-            #     if item in self.myWordList:
-            #         self.myWordList.remove(item)
-
             if len(self.myWordList) == 0:
                 for x in f:
-                    if(len(x) == 6):  # words contain '\n' at the end which counts as 1 character, hence 6
+                    if(len(x.strip()) == 5):
                         self.myWordList.append(x[:-1].upper())
 
             word = random.choices(self.myWordList)

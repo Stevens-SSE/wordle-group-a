@@ -33,8 +33,9 @@ class Wordle:
         games_played = 0
         games_won = 0
         guess_history = []
+        max_attempts = 5
 
-        while attempt < 6:
+        while attempt <= max_attempts:
             # input_word = Ui.inputFromUser(attempt)
             new_answer = ""
             if all(v is not None for v in answer):
@@ -125,7 +126,7 @@ class Wordle:
             print(f"The good letters selected: " + good_letters)
             print(f"The bad letters selected : " + bad_letters + "\n")
 
-            if attempt == 6:
+            if attempt > max_attempts:
                 print(f"Hard luck!!!\nToday's word was {todays_word}")
                 games_played += 1
                 self.displayResults(games_played, games_won, guess_history)
