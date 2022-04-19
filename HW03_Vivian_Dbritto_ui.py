@@ -31,7 +31,9 @@ class Ui:
     # check if entered word is of length 5
 
     def checkWordLength(input_word: str) -> bool:
-        if len(input_word.strip()) != 5:  # To handle empty spaces strings like "     "
+        max_length = 5
+
+        if len(input_word.strip()) != max_length:  # To handle empty spaces strings like "     "
             print('\nWARNING : Word should be of length 5')
             return False
         else:

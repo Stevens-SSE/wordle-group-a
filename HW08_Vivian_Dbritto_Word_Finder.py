@@ -38,7 +38,7 @@ class Helper:
 
             # If user does not provide Good or bad words, then display top 50 words
             if len(goodWords) == 0 and len(badWords) == 0:
-                return wordlist[0]
+                return wordlist[0:50]
 
             for x in wordlist:
                 # good = all(letter in x for letter in goodWords)
